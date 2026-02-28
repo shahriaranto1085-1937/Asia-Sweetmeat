@@ -112,12 +112,12 @@ const Navbar = ({ showSearch = true }: NavbarProps) => {
           isScrolled ? 'bg-background/95 backdrop-blur-md shadow-soft' : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 lg:px-8">
+        <div className="container mx-auto px-25 lg:px-8">
           {/* ✅ Mobile: 3-column grid so logo can be centered later if you want */}
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between py-2">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="Asia Sweets" className="h-14 w-auto object-contain" />
+              <img src={logo} alt="Asia Sweetmeat" className="h-14 w-auto object-contain" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -300,7 +300,7 @@ const Navbar = ({ showSearch = true }: NavbarProps) => {
           />
 
           {/* ✅ IMPORTANT: overflow-y-auto so mobile can scroll when keyboard opens */}
-          <div className="relative h-full w-full overflow-y-auto p-4 pt-24">
+          <div className="relative h-full w-full overflow-y-auto p-3 sm:p-4 pt-20 sm:pt-24">
             <div className="mx-auto w-full max-w-3xl">
               <div className="bg-card border border-border rounded-2xl shadow-lg overflow-hidden">
                 {/* header */}
@@ -361,7 +361,7 @@ const Navbar = ({ showSearch = true }: NavbarProps) => {
                     </p>
                   ) : (
                     // ✅ MOBILE 3-COL GRID HERE
-                    <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
                       {filteredMini.map((item) => (
                         <Link
                           key={item.id}
@@ -369,7 +369,7 @@ const Navbar = ({ showSearch = true }: NavbarProps) => {
                           onClick={closeMini}
                           className="card-sweet group flex flex-col"
                         >
-                          <div className="relative w-full h-20 sm:h-52 overflow-hidden rounded-xl">
+                          <div className="relative w-full overflow-hidden rounded-xl aspect-[4/2.5]">
                             <img
                               src={item.image_url}
                               alt={item.name}
@@ -382,12 +382,11 @@ const Navbar = ({ showSearch = true }: NavbarProps) => {
                               {item.categories?.name || 'Uncategorized'}
                             </span>
 
-                            <div className="flex items-start justify-between gap-2 mt-1">
-                              <h3 className="font-display text-sm sm:text-xl font-semibold text-foreground leading-tight line-clamp-2">
+                          <div className="mt-1">
+                              <h3 className="font-display text-xs sm:text-xl font-semibold text-foreground leading-tight line-clamp-2">
                                 {item.name}
                               </h3>
-
-                              <span className="whitespace-nowrap rounded-full bg-primary/10 text-primary px-2 py-1 sm:px-3 sm:py-1.5 text-[11px] sm:text-sm font-extrabold tracking-tight">
+                              <span className="block mt-0.5 sm:mt-1 whitespace-nowrap rounded-full bg-primary/10 text-primary px-2 py-0.5 sm:px-3 sm:py-1.5 text-[10px] sm:text-sm font-extrabold tracking-tight w-fit">
                                 ৳{Number(item.price).toFixed(0)}/kg
                               </span>
                             </div>

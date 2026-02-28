@@ -94,15 +94,15 @@ const CategoriesManager = () => {
     <div>
       <h2 className="text-2xl font-display font-semibold mb-6">Categories</h2>
 
-      <form onSubmit={handleAdd} className="flex gap-3 mb-8">
+      <form onSubmit={handleAdd} className="flex flex-col sm:flex-row gap-3 mb-8">
         <Input
           placeholder="New category name"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
-          className="max-w-sm"
+          className="flex-1 sm:max-w-sm"
           required
         />
-        <Button type="submit" disabled={adding}>
+        <Button type="submit" disabled={adding} className="w-full sm:w-auto">
           <Plus className="w-4 h-4 mr-1" /> Add
         </Button>
       </form>
@@ -110,30 +110,48 @@ const CategoriesManager = () => {
       {categories.length === 0 ? (
         <p className="text-muted-foreground text-center py-12">No categories yet.</p>
       ) : (
-        <div className="border rounded-lg overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-secondary/50">
-              <tr>
-                <th className="text-left p-3 font-medium">Name</th>
-                <th className="text-left p-3 font-medium">Products</th>
-                <th className="text-right p-3 font-medium">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((c) => (
-                <tr key={c.id} className="border-t hover:bg-secondary/20">
-                  <td className="p-3 font-medium">{c.name}</td>
-                  <td className="p-3 text-muted-foreground">{c.product_count}</td>
-                  <td className="p-3 text-right">
-                    <Button variant="ghost" size="icon" onClick={() => handleDelete(c)}>
-                      <Trash2 className="w-4 h-4 text-destructive" />
-                    </Button>
-                  </td>
+        <>
+          {/* Desktop table */}
+          <div className="hidden md:block border rounded-lg overflow-hidden">
+            <table className="w-full text-sm">
+              <thead className="bg-secondary/50">
+                <tr>
+                  <th className="text-left p-3 font-medium">Name</th>
+                  <th className="text-left p-3 font-medium">Products</th>
+                  <th className="text-right p-3 font-medium">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {categories.map((c) => (
+                  <tr key={c.id} className="border-t hover:bg-secondary/20">
+                    <td className="p-3 font-medium">{c.name}</td>
+                    <td className="p-3 text-muted-foreground">{c.product_count}</td>
+                    <td className="p-3 text-right">
+                      <Button variant="ghost" size="icon" onClick={() => handleDelete(c)}>
+                        <Trash2 className="w-4 h-4 text-destructive" />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-2">
+            {categories.map((c) => (
+              <div key={c.id} className="border border-border rounded-xl bg-card p-3 flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-sm">{c.name}</p>
+                  <p className="text-xs text-muted-foreground">{c.product_count} product{c.product_count !== 1 ? 's' : ''}</p>
+                </div>
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleDelete(c)}>
+                  <Trash2 className="w-3.5 h-3.5 text-destructive" />
+                </Button>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

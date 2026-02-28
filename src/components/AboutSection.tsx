@@ -6,10 +6,10 @@ const AboutSection = () => {
           <span className="text-primary font-medium text-sm uppercase tracking-wider">
             Our Heritage
           </span>
-          <h2 className="section-title mt-2">About Asia Sweets</h2>
+          <h2 className="section-title mt-2">About Asia Sweetmeat</h2>
           <div className="mt-8 space-y-6 text-muted-foreground text-lg leading-relaxed">
             <p>
-              For over two decades, Asia Sweets has been the heart of traditional sweetmeat 
+              For over two decades, Asia Sweetmeat has been the heart of traditional sweetmeat
               craftsmanship in our community. What started as a small family kitchen has 
               blossomed into a beloved destination for those who cherish authentic flavors.
             </p>

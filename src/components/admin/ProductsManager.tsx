@@ -198,39 +198,60 @@ const ProductsManager = () => {
       {filtered.length === 0 ? (
         <p className="text-center text-muted-foreground py-12">No products found.</p>
       ) : (
-        <div className="overflow-x-auto border rounded-lg">
-          <table className="w-full text-sm">
-            <thead className="bg-secondary/50">
-              <tr>
-                <th className="text-left p-3 font-medium">Image</th>
-                <th className="text-left p-3 font-medium">Name</th>
-                <th className="text-left p-3 font-medium">Category</th>
-                <th className="text-left p-3 font-medium">Price</th>
-                <th className="text-left p-3 font-medium hidden md:table-cell">Details</th>
-                <th className="text-right p-3 font-medium">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((p) => (
-                <tr key={p.id} className="border-t hover:bg-secondary/20">
-                  <td className="p-3">
-                    <img src={p.image_url} alt={p.name} className="w-12 h-12 rounded-lg object-cover" loading="lazy" />
-                  </td>
-                  <td className="p-3 font-medium">{p.name}</td>
-                  <td className="p-3 text-muted-foreground">{p.categories?.name || '—'}</td>
-                  <td className="p-3">৳{Number(p.price).toFixed(0)}</td>
-                  <td className="p-3 text-muted-foreground hidden md:table-cell max-w-xs truncate">{p.details}</td>
-                  <td className="p-3 text-right">
-                    <div className="flex items-center justify-end gap-1">
-                      <Button variant="ghost" size="icon" onClick={() => openEdit(p)}><Pencil className="w-4 h-4" /></Button>
-                      <Button variant="ghost" size="icon" onClick={() => handleDelete(p.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
-                    </div>
-                  </td>
+        <>
+          {/* Desktop table */}
+          <div className="hidden md:block overflow-x-auto border rounded-lg">
+            <table className="w-full text-sm">
+              <thead className="bg-secondary/50">
+                <tr>
+                  <th className="text-left p-3 font-medium">Image</th>
+                  <th className="text-left p-3 font-medium">Name</th>
+                  <th className="text-left p-3 font-medium">Category</th>
+                  <th className="text-left p-3 font-medium">Price</th>
+                  <th className="text-left p-3 font-medium">Details</th>
+                  <th className="text-right p-3 font-medium">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {filtered.map((p) => (
+                  <tr key={p.id} className="border-t hover:bg-secondary/20">
+                    <td className="p-3">
+                      <img src={p.image_url} alt={p.name} className="w-12 h-12 rounded-lg object-cover" loading="lazy" />
+                    </td>
+                    <td className="p-3 font-medium">{p.name}</td>
+                    <td className="p-3 text-muted-foreground">{p.categories?.name || '—'}</td>
+                    <td className="p-3">৳{Number(p.price).toFixed(0)}</td>
+                    <td className="p-3 text-muted-foreground max-w-xs truncate">{p.details}</td>
+                    <td className="p-3 text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        <Button variant="ghost" size="icon" onClick={() => openEdit(p)}><Pencil className="w-4 h-4" /></Button>
+                        <Button variant="ghost" size="icon" onClick={() => handleDelete(p.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-3">
+            {filtered.map((p) => (
+              <div key={p.id} className="border border-border rounded-xl bg-card p-3 flex gap-3">
+                <img src={p.image_url} alt={p.name} className="w-16 h-16 rounded-lg object-cover flex-shrink-0" loading="lazy" />
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">{p.name}</p>
+                  <p className="text-xs text-muted-foreground">{p.categories?.name || '—'}</p>
+                  <p className="text-sm font-bold text-primary mt-0.5">৳{Number(p.price).toFixed(0)}</p>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => openEdit(p)}><Pencil className="w-3.5 h-3.5" /></Button>
+                  <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleDelete(p.id)}><Trash2 className="w-3.5 h-3.5 text-destructive" /></Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
